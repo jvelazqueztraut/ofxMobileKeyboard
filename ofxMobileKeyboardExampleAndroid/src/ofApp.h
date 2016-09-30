@@ -33,9 +33,6 @@ class ofApp : public ofxAndroidApp{
 		void cancelPressed();
 
 
-		float textBoxWidth, textBoxHeight;
 		ofxMobileKeyboard keyboard;
-		string keyboardText;
-
 
 };

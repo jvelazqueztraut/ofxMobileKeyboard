@@ -3,17 +3,10 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
 
-	textBoxWidth = 720;
-	textBoxHeight = 130;
 	/*
 	 * @param projectName, the project name needed for JNI bridge setup
-	 * @param x, the textBox x position
-	 * @param y, the textBox y position
-	 * @param w, the textBox width
-	 * @param h, the textBox height
-	 * @param hint, the textBox hint text
 	 */
-	keyboard.setup("ofxMobileKeyboardExampleAndroid", (ofGetWidth()/2)-(textBoxWidth/2), (ofGetHeight()/2)-(textBoxHeight/2), textBoxWidth, textBoxHeight, "Type text here");
+	keyboard.setup("ofxMobileKeyboardExampleAndroid");
 
 	keyboard.showKeyboard();
 }
@@ -25,15 +18,6 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-
-
-	if(keyboard.isKeyboardActive()==true){
-
-		keyboardText = keyboard.recieveKeyboard();
-
-		ofLog() << "Recieve Keyboard String: "<< keyboardText << endl;
-
-	}
 
 }
 
