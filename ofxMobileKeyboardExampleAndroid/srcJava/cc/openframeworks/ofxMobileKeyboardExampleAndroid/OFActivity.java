@@ -1,29 +1,27 @@
-package cc.openframeworks.androidEmptyExample;
+package cc.openframeworks.ofxMobileKeyboardExampleAndroid;
 
-import android.annotation.SuppressLint;
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.content.Context;
-import cc.openframeworks.OFAndroid;
 import android.view.inputmethod.InputMethodManager;
+
+import cc.openframeworks.OFAndroid;
 
 
 public class OFActivity extends cc.openframeworks.OFActivity{
 
   @Override
     public void onCreate(Bundle savedInstanceState)
-    {
-    super.onCreate(savedInstanceState);
-    String packageName = getPackageName();
+    { 
+        super.onCreate(savedInstanceState);
+        String packageName = getPackageName();
 
-    ofApp = new OFAndroid(packageName,this);
+        ofApp = new OFAndroid(packageName,this);
     }
   
-  @SuppressLint("MissingSuperCall")
   @Override
   public void onDetachedFromWindow() {
   }
@@ -60,43 +58,41 @@ public class OFActivity extends cc.openframeworks.OFActivity{
 
 
   OFAndroid ofApp;
-    
 
-  
-//-------------------------------------------------------------------- KEYBOARD METHODS  -----------------------------------------------------//
-    public void showKeyboard(){
+  //-------------------------------------------------------------------- KEYBOARD METHODS  -----------------------------------------------------//
+  public void showKeyboard(){
 
       runOnUiThread(new Runnable() {
-           @Override
-           public void run() {
-            Log.v("OF KEYBOARD", "SHOW KEYBOARD");
+          @Override
+          public void run() {
+              Log.v("OF KEYBOARD", "SHOW KEYBOARD");
 
-            InputMethodManager im = (InputMethodManager)OFAndroid.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-            im.showSoftInput(OFAndroid.getGLContentView(), InputMethodManager.SHOW_FORCED);
+              ofApp.getGLContentView().setFocusable(true);
+              ofApp.getGLContentView().setFocusableInTouchMode(true);
+
+              InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+              inputMethodManager.toggleSoftInputFromWindow(ofApp.getGLContentView().getApplicationWindowToken(), InputMethodManager.SHOW_FORCED, 0);
           }
       });
-          
     }
-    
-    
+
     public void hideKeyboard(){
-    
-      runOnUiThread(new Runnable() {
-           @Override
-           public void run() {
 
-            Log.v("OF KEYBOARD", "HIDE KEYBOARD");
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
 
-            InputMethodManager im = (InputMethodManager)OFAndroid.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-            im.showSoftInput(OFAndroid.getGLContentView(), InputMethodManager.SHOW_FORCED);
-          }
-      });
+                Log.v("OF KEYBOARD", "HIDE KEYBOARD");
+
+                InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                inputMethodManager.toggleSoftInputFromWindow(ofApp.getGLContentView().getApplicationWindowToken(), InputMethodManager.SHOW_FORCED, 0);
+            }
+        });
 
     }
-    
-    
+
     //----------------------------------------------------------------END KEYBOARD METHODS ----------------------------------------------------//
-  
+
     // Menus
     // http://developer.android.com/guide/topics/ui/menus.html
     @Override
